@@ -7,6 +7,7 @@ Dạo đầu cũng khá dài rồi. Sau đây là các bước để thực hi�
 https://tinhte.vn/thread/hass-dieu-khien-cong-tac-wifi-tuya-qua-mang-noi-bo-khong-can-flash-tasmota.3049786/
 
 1. Trước tiên bạn cần xác định được LocalKey và DeviceId của từng công tắc trong nhà bạn
+
 Phương pháp 1: Sử dụng điện thoại Android
 
 1.1 Sử dụng điện thoại Android đã được Root (Bắt buộc phải là điện thoại đã Root) Hoặc hãy cài Bluestacks trên máy tính
@@ -21,6 +22,8 @@ Phương pháp 1: Sử dụng điện thoại Android
 
 1.6 Di chuyển đến thư mục chứa dữ liệu "/data/data/com.tuya.smartlife/shared_prefs" và mở file preferences_global_key.xml (nếu bạn không thấy file này thì thử tìm file preferences_global_keyabcxyz12345.xml - trong đó abcxyz12345 là một chuỗi bất kỳ nhé.
 bạn sẽ tìm thấy localKey và devId
+
+Phương pháp 2: đọc trong link gốc ở tinhte
 
 --hết copy--
 
