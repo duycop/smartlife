@@ -1,0 +1,91 @@
+<html>
+<head>
+<title>SmartLife XML</title>
+<style>
+td, th {
+    border: 1px solid black;
+}
+table {
+    margin-top:5px;
+    border-collapse: collapse;
+}
+  input{width:70%;}
+  td{text-align:center;padding-left:5px;padding-right:5px;}
+  img{height:100px;}
+</style>
+</head>
+<body>
+	<h1>SmartLife XML to YAML config for Hass</h1>
+	SmartLife XML file: <input type="file" id="upload">
+	<div id="result"></div>
+<script>
+document.getElementById('upload').addEventListener('change', readFileAsString);
+function yaml(stt,name,id,devId,localKey){
+	var r;
+	r ='#---localtuya: '+stt+'---\n';
+	r+='  - platform: localtuya\n';
+	r+='    name: "'+name+'"\n';
+	r+='    host: IP_HERE\n';
+	r+='    id: '+id+'\n';
+	r+='    device_id: '+devId+'\n';
+	r+='    local_key: '+localKey+'\n';
+	r+='    protocol_version: 3.3\n';
+	r+='    scan_interval: 1 # default interval will be 5s\n';
+	r+='    interval: 1 # should be the same with scan_interval\n';
+	return r;
+}
+function ReadSmartLifeInfo(s){
+  s=s.replace(new RegExp('&quot;', 'g'), '"');
+  var a = s.indexOf('{"deviceRespBeen"');
+  var b = s.indexOf('</string>',a);
+  var j=s.substring(a,b);
+  var o=JSON.parse(j);
+  var x=o.deviceRespBeen;
+  var y='<table border=1>';
+  y+="<tr><th>#</th><th>DevName</th><th>Icon</th><th>id</th><th>ItemName</th><th>DevId</th><th>LocalKey</th></tr>\n";
+  var z=0;
+  var r='#/config/configuration.yaml code by Do.Duy.Cop\nswitch:\n';
+  for(var i=0;i<x.length;i++){
+    var t=x[i].dpName;
+    var c=0;
+    for(var k in t)c++;
+    if(c>0){
+      var d=0;
+      for(var k in t){
+        z++;
+        d++;
+        if(d==1)
+          y+="<tr><td>"+z+"</td><td rowspan="+c+">"+x[i].name+"</td><td rowspan="+c+"><img src='"+x[i].iconUrl+"'></td><td>"+d+"</td><td>"+t[k]+"</td><td rowspan="+c+">"+x[i].devId+"</td><td rowspan="+c+">"+x[i].localKey+"</td></tr>\n";
+        else 
+          y+="<tr><td>"+z+"</td><td>"+d+"</td><td>"+t[k]+"</td></tr>\n";
+        r+=yaml(z,t[k]+'-'+x[i].name,d,x[i].devId,x[i].localKey);
+      }
+    }
+    else{
+      z++;
+      y+="<tr><td>"+z+"</td><td>"+x[i].name+"</td><td><img src='"+x[i].iconUrl+"'></td><td>"+1+"</td><td></td><td>"+x[i].devId+"</td><td>"+x[i].localKey+"</td></tr>\n";
+      r+=yaml(z,x[i].name,1,x[i].devId,x[i].localKey);
+      
+    }
+  }
+  y+='</table>';
+  return {table:y,json:j,yaml:r};
+}
+function readFileAsString() {
+    var files = this.files;
+    var div=document.getElementById('result');
+    if (files.length === 0) {
+        div.innerHTML='No file is selected';
+        return;
+    }
+    var reader = new FileReader();
+    reader.onload = function(event) {
+        var s=event.target.result;
+        var r=ReadSmartLifeInfo(s);
+        div.innerHTML=r.table+"<pre>"+r.yaml+"</pre>";
+    };
+    reader.readAsText(files[0]);
+}
+</script>
+</body>
+</html>
