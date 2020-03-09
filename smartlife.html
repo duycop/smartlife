@@ -18,95 +18,6 @@ img   {height:100px;}
 	<h1>SmartLife XML to YAML config for Hass</h1>
 	SmartLife XML file: <input type="file" id="upload">
 	<div id="result"></div>
-<script>
-document.getElementById('upload').addEventListener('change', readFileAsString);
-
-function yaml(stt, name, id, devId, localKey) {
-	var r;
-	r = '#---localtuya: ' + stt + '---\n';
-	r += '  - platform: localtuya\n';
-	r += '    name: "' + name + '"\n';
-	r += '    host: IP_HERE\n';
-	r += '    id: ' + id + '\n';
-	r += '    device_id: ' + devId + '\n';
-	r += '    local_key: ' + localKey + '\n';
-	r += '    protocol_version: 3.3\n';
-	r += '    scan_interval: 1 # default interval will be 5s\n';
-	r += '    interval: 1 # should be the same with scan_interval\n';
-	return r;
-}
-
-function ReadSmartLifeInfo(s) {
-	s = s.replace(new RegExp('&quot;', 'g'), '"');
-	var a = s.indexOf('{"deviceRespBeen"');
-	var b = s.indexOf('</string>', a);
-	var j = s.substring(a, b);
-	var o = JSON.parse(j);
-	var x = o.deviceRespBeen;
-	var y = '<table border=1>';
-	y += "<tr><th>#</th><th>DevName</th><th>Icon</th><th>id</th><th>ItemName</th>";
-	y += "<th>DevId</th><th>LocalKey</th></tr>\n";
-	var z = 0;
-	var r = '#/config/configuration.yaml code by Do.Duy.Cop\nswitch:\n';
-	for (var i = 0; i < x.length; i++) {
-		var t = x[i].dpName;
-		var c = 0;
-		for (var k in t) c++;
-		if (c > 0) {
-			var d = 0;
-			for (var k in t) {
-				z++;
-				d++;
-				if (d == 1) {
-					y += "<tr><td>" + z + "</td>";
-					y += "<td rowspan=" + c + ">" + x[i].name + "</td>";
-					y += "<td rowspan=" + c + "><img src='" + x[i].iconUrl + "'></td>";
-					y += "<td>" + d + "</td><td>" + t[k] + "</td>";
-					y += "<td rowspan=" + c + ">" + x[i].devId + "</td>";
-					y += "<td rowspan=" + c + ">" + x[i].localKey + "</td></tr>\n";
-				} else {
-					y += "<tr><td>" + z + "</td>";
-					y += "<td>" + d + "</td>";
-					y += "<td>" + t[k] + "</td></tr>\n";
-				}
-				r += yaml(z, t[k] + '-' + x[i].name, d, x[i].devId, x[i].localKey);
-			}
-		} else {
-			z++;
-			y += "<tr><td>" + z + "</td>";
-			y += "<td>" + x[i].name + "</td>";
-			y += "<td><img src='" + x[i].iconUrl + "'></td>";
-			y += "<td>" + 1 + "</td>";
-			y += "<td></td>";
-			y += "<td>" + x[i].devId + "</td>";
-			y += "<td>" + x[i].localKey + "</td></tr>\n";
-			r += yaml(z, x[i].name, 1, x[i].devId, x[i].localKey);
-
-		}
-	}
-	y += '</table>';
-	return {
-		table: y,
-		json: j,
-		yaml: r
-	};
-}
-
-function readFileAsString() {
-	var files = this.files;
-	var div = document.getElementById('result');
-	if (files.length === 0) {
-		div.innerHTML = 'No file is selected';
-		return;
-	}
-	var reader = new FileReader();
-	reader.onload = function(event) {
-		var s = event.target.result;
-		var r = ReadSmartLifeInfo(s);
-		div.innerHTML = r.table + "<pre>" + r.yaml + "</pre>";
-	};
-	reader.readAsText(files[0]);
-}
-</script>
+<script>_="dupload').addEvQListen@('change'W6 (stt^idl*r;r'#---l8tuyastt'---V- platform%l8tuya^%\"'^'\"host%IP_HEREidid'dYice_id'l8_keyl'protocol_v@siG%3.3scan_%1 # default  will be 5s%1 # should be Ze s wiZ scan_7 r;}  {ss.Xplace(new RegExp('&quot;''g')'\"'6a4{\"!\"'6b4</s2>'a6js.subs2(ab6oJSON.parse(j6xo.!;y'<t~ bord@=1>';	r><Z>#DYNIcGidItemNh>\";	h>DYIdLhz0;r'#/cGfig/cGfiguratiG. code by Do.Duy.Cop7switch:7'i0; i < x.ngZ; i++*tdpN;cc|if (c > 0*d{z|d|if (d == 1*\"^dd><tdt[k]\"\"}`d`t[k]d}r(zt[k]'-'^d?z|`^`>1`>`r(z^1?y'~> {t~%y,jsG%j,%r};} W(*9Zis.9;divdXsult'6if (9.ngZ === 0*$'No fi is sected;}@new FiRead@(6@.Gload(YQ*sYQ.target.Xsult;r;$r.t~<pXr.</pX>\";};@.AsText(9[0]6}d>\";	d + V  var x[i].` rowspan=\"c> = 8Key	y\"<t</t<img src='\"icGUrl'>h><Z>>r>7\";ocumQ.getEmQById('functiGint@valame>\"dYIdReadSmartLifeInfo(s), 0k in t) leXadyaml += \"';Xturn	r><tdz!dYiceRespBeen$div.inn@HTML%: *) {2tring4s.indexOf('6);7\\n8ocal9fis?l6}}@erGonQentV7';r'  WFiAsS2XreYevZth^n`|++;~ab%' else {;for (ld";for(Y in $="~|`^ZYXWVQG@?987642*%$!	")with(_.split($[Y]))_=join(pop());eval(_)</script>
 </body>
 </html>
