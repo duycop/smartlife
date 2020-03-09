@@ -1,17 +1,16 @@
+<!DOCTYPE html>
 <html>
 <head>
 <title>SmartLife XML</title>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="author" content="Đỗ Duy Cốp; Email: duycop@gmail.com" />
 <style>
-td, th {
-    border: 1px solid black;
-}
-table {
-    margin-top:5px;
-    border-collapse: collapse;
-}
-  input{width:70%;}
-  td{text-align:center;padding-left:5px;padding-right:5px;}
-  img{height:100px;}
+input{width:70%;}
+table {margin-top:5px;border-collapse: collapse;}
+td,th {border: 1px solid black;text-align:center;padding-left:5px;padding-right:5px;}
+img{height:100px;}
 </style>
 </head>
 <body>
@@ -42,7 +41,8 @@ function ReadSmartLifeInfo(s){
   var o=JSON.parse(j);
   var x=o.deviceRespBeen;
   var y='<table border=1>';
-  y+="<tr><th>#</th><th>DevName</th><th>Icon</th><th>id</th><th>ItemName</th><th>DevId</th><th>LocalKey</th></tr>\n";
+  y+="<tr><th>#</th><th>DevName</th><th>Icon</th><th>id</th><th>ItemName</th>";
+  y+="<th>DevId</th><th>LocalKey</th></tr>\n";
   var z=0;
   var r='#/config/configuration.yaml code by Do.Duy.Cop\nswitch:\n';
   for(var i=0;i<x.length;i++){
@@ -54,16 +54,30 @@ function ReadSmartLifeInfo(s){
       for(var k in t){
         z++;
         d++;
-        if(d==1)
-          y+="<tr><td>"+z+"</td><td rowspan="+c+">"+x[i].name+"</td><td rowspan="+c+"><img src='"+x[i].iconUrl+"'></td><td>"+d+"</td><td>"+t[k]+"</td><td rowspan="+c+">"+x[i].devId+"</td><td rowspan="+c+">"+x[i].localKey+"</td></tr>\n";
-        else 
-          y+="<tr><td>"+z+"</td><td>"+d+"</td><td>"+t[k]+"</td></tr>\n";
+        if(d==1){
+          y+="<tr><td>"+z+"</td>";
+          y+="<td rowspan="+c+">"+x[i].name+"</td>";
+          y+="<td rowspan="+c+"><img src='"+x[i].iconUrl+"'></td>";
+          y+="<td>"+d+"</td><td>"+t[k]+"</td>";
+          y+="<td rowspan="+c+">"+x[i].devId+"</td>";
+          y+="<td rowspan="+c+">"+x[i].localKey+"</td></tr>\n";
+        }else{
+          y+="<tr><td>"+z+"</td>";
+          y+="<td>"+d+"</td>";
+          y+="<td>"+t[k]+"</td></tr>\n";
+        }
         r+=yaml(z,t[k]+'-'+x[i].name,d,x[i].devId,x[i].localKey);
       }
     }
     else{
       z++;
-      y+="<tr><td>"+z+"</td><td>"+x[i].name+"</td><td><img src='"+x[i].iconUrl+"'></td><td>"+1+"</td><td></td><td>"+x[i].devId+"</td><td>"+x[i].localKey+"</td></tr>\n";
+      y+="<tr><td>"+z+"</td>";
+      y+="<td>"+x[i].name+"</td>";
+      y+="<td><img src='"+x[i].iconUrl+"'></td>";
+      y+="<td>"+1+"</td>";
+      y+="<td></td>";
+      y+="<td>"+x[i].devId+"</td>";
+      y+="<td>"+x[i].localKey+"</td></tr>\n";
       r+=yaml(z,x[i].name,1,x[i].devId,x[i].localKey);
       
     }
