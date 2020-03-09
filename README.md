@@ -3,7 +3,7 @@
 Read xml of smartlife (tuya) to Hass
 
 --Đoạn này copy từ tinhte-- 
-https://tinhte.vn/thread/hass-dieu-khien-cong-tac-wifi-tuya-qua-mang-noi-bo-khong-can-flash-tasmota.3049786/
+[tinhte.vn/thread/hass-dieu-khien-cong-tac-wifi-tuya-qua-mang-noi-bo-khong-can-flash-tasmota.3049786/]
 
 1. Trước tiên bạn cần xác định được LocalKey và DeviceId của từng công tắc trong nhà bạn
 
@@ -26,5 +26,5 @@ Phương pháp 2: đọc trong link gốc ở tinhte
 
 --hết copy--
 
-Ở bước 1.4 trên windows có thể dùng tool ngoài là: BlueStacks Tweaker tại https://bstweaker.tk/ để copy file xml ra
+Ở bước 1.4 trên windows có thể dùng tool ngoài là: BlueStacks Tweaker tại [bstweaker.tk] để copy file xml ra
 sau khi có file XML rồi thì dùng tool smartlife.html
