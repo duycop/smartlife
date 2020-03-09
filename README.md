@@ -1,9 +1,8 @@
 # smartlife
-ready xml of smartlife (tuya) to hass
+Đây là tool để đọc file xml ra yaml cho Hass
+Read xml of smartlife (tuya) to Hass
 
-Dạo đầu cũng khá dài rồi. Sau đây là các bước để thực hiện.
-
---Đoạn này copy từ tinhte--
+--Đoạn này copy từ tinhte-- 
 https://tinhte.vn/thread/hass-dieu-khien-cong-tac-wifi-tuya-qua-mang-noi-bo-khong-can-flash-tasmota.3049786/
 
 1. Trước tiên bạn cần xác định được LocalKey và DeviceId của từng công tắc trong nhà bạn
